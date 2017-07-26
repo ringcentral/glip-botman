@@ -9,21 +9,23 @@ This is a simple Botman Adaptor for Glip which is ready to use and fairly simple
  
 ## Requirement
 
- - PHP 5.5+
+ - PHP 5.5+ 
  - CURL extension
  - MCrypt extension
  - ngrok tunneling
  
+Note: for PHP v 5.6 you would need to comment the below line in the `php.ini` file.  
+"always_populate_raw_post_data = -1" 
 
 ## Installation
 
 ### Via Composer
-
-- `git clone https://github.com/anilkumarbp/glip-botman.git`
-- `cd glip-botman`
-- `curl -sS https://getcomposer.org/installer | php`
-- `composer install`
-
+```php
+$ git clone https://github.com/anilkumarbp/glip-botman.git
+$ cd glip-botman
+$ curl -sS https://getcomposer.org/installer | php
+$ composer install
+```
 
 ## Configure your Bot
 
@@ -51,13 +53,17 @@ Edit the .env file to add the app details and user details.
 Note: The demo assumes that you are not using a Live server instead the PHP's [Built-In Web server](http://php.net/manual/en/features.commandline.webserver.php) and the tunneling service from [ngrok](https://ngrok.com/).
 
 ### Start the PHP built-in Web Server locally
- 
+
 ```php
-php -S localhost:8080
+$ cd glip-botman
+``` 
+```php
+$ php -S localhost:8080
 ```
 
 ### Start ngrok ( for demo purposes using ngrok )
 
+Open another terminal a
 ```bash
 $ ngrok http 8080
 ```
@@ -72,6 +78,10 @@ Add this to the .env parameter `GLIP_WEBHOOK_URL` created above.
 ## Start the Bot
 
 In the terminal, just run this command:
+
+```php
+$ cd glip-botman
+```
 
 ```php
 $ php index.php
