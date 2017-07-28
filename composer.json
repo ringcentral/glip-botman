@@ -1,6 +1,6 @@
 {
   "name": "anilkumarbp/glip-botman",
-  "type": "Botman Adaptor for Glip",
+  "type": "library",
   "description": "Independent adaptor for Glip to support Botman",
   "keywords": [
     "php",
