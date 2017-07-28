@@ -1,6 +1,6 @@
 <?php
 
-namespace GlipBotman;
+namespace GlipDriver;
 
 use Mpociot\BotMan\User;
 use Mpociot\BotMan\Answer;

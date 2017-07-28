@@ -8,7 +8,7 @@ use Mpociot\BotMan\BotMan;
 use Mpociot\BotMan\DriverManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use GlipBotman\GlipBotman;
+use GlipDriver\GlipBotman;
 
 // Parse the .env file
 $dotenv = new Dotenv\Dotenv(getcwd());

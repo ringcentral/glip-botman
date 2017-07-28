@@ -1,5 +1,5 @@
 {
-  "name": "glip-botman",
+  "name": "ringcentral/glip-botman",
   "type": "Botman Adaptor for Glip",
   "description": "Independent adaptor for Glip to support Botman",
   "keywords": [
