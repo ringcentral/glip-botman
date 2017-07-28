@@ -87,6 +87,24 @@ $ cd glip-botman
 $ php index.php
 ```
 
+If its successful, you will get a message as below : 
+
+**Wohooo, your Bot is Registered. Please follow the instructions on on-boarding the bot into Glip**
+
+## On-Boarding Bot into Glip
+1. **Assign a Name and Unique Email Address to the Bot**
+ ![Bot user screenshots](assets/service_web.png)
+ 
+**Note:** The above user refers to the same user whose credentials was used in the `.env` file to configure the bot.
+  
+2. **Invite the bot into a group using the email ID**
+ ![Glip group screenshots](assets/glip_group.png)
+
+**Note:** Create a group on `Glip` and invite the Bot using `Add Member` button on the top extreme right.
+ 
+3. **Start chatting with the Bot**
+ ![Glip group screenshots](assets/chat_bot.png)
+ 
 ## Extending the Botman-Glip Adapter
 
 You can set the `Bot` to listen to any specific commands/instructions . You can include the commands in the php file whihc is used to setup the Webhook. In our case, it is `webhook.php`

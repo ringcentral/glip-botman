@@ -51,11 +51,15 @@ $botman = BotManFactory::create($config);
 
 // Give the bot something to listen for.
 $botman->hears('hello', function (BotMan $bot) {
-    $bot->reply('Hello yourself dude.');
+    $bot->reply('Hello yourself.');
+})->driver(GlipBotman::class);
+
+$botman->hears('what is your name', function (BotMan $bot) {
+    $bot->reply('My name is Minion Bot.');
 })->driver(GlipBotman::class);
 
 
-$botman->hears('hello1', function (BotMan $bot) {
+$botman->hears('What can you do', function (BotMan $bot) {
     $bot->reply('I am still under construction');
 })->driver(GlipBotman::class);
 
