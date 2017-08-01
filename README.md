@@ -12,7 +12,6 @@ This is a simple Botman Adaptor for Glip which is ready to use and fairly simple
  - PHP 5.5+ 
  - CURL extension
  - MCrypt extension
- - ngrok tunneling
  
 Note: for PHP v 5.6 you would need to comment the below line in the `php.ini` file.  
 "always_populate_raw_post_data = -1" 
