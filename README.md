@@ -17,27 +17,38 @@ This is a simple Botman Adaptor for Glip which is ready to use and fairly simple
 Note: for PHP v 5.6 you would need to comment the below line in the `php.ini` file.  
 "always_populate_raw_post_data = -1" 
 
-## Installation
+## Installation & Setup
 
-### Via Composer
+### Via Github Repo
 ```php
 $ git clone https://github.com/anilkumarbp/glip-botman.git
 $ cd glip-botman
 $ curl -sS https://getcomposer.org/installer | php
 $ composer install
 ```
+### Via Composer 
 
+Require this package with composer using the following command:    
+```php
+$ composer require anilkumarbp/glip-botman
+```
+
+Require Composer's autoloader in your PHP script ( index.php ) assuming it is in the same directory where you installed Composer :
+    
+```php
+require('vendor/autoload.php');
+```
+    
 ## Configure your Bot
 
 ### Provide Bot User details in `.env` file:
 
 ```php
-$ cd glip-botman
-$ cp .env.sample .env
 $ vi .env
 ```
 
-Edit the .env file to add the app details and user details.
+
+Edit the .env file to copy the below and edit the app details and user details.
 
 ```php
     GLIP_SERVER=https://platform.devtest.ringcentral.com        // Server Url ( Production: https://platform.ringcentral.com || Sandbox: https://platform.devtest.ringcentral.com )
@@ -47,6 +58,23 @@ Edit the .env file to add the app details and user details.
     GLIP_PASSWORD=Password                                
     GLIP_EXTENSION=Extension                                
 ```
+
+### Define an Application in RingCentral
+
+In order to communicate with the RingCentral API, you will need to have RingCentral API Keys for the appropriate environment, either **Sandbox** or **Production**.
+ 
+ 1. Login to the Developer Portal [https://developer.ringcentral.com/login.html#/](https://developer.ringcentral.com/login.html#/) if you haven't already. 2. Click on 'Create App' to define a new application
+    * **Application Name:** Your choice, but something easy to identify and associate with purpose is good
+    * **Description:** Your suitable description for the application. 
+    * **Application Type:** Private
+    * **Platform Type:** **Server-only (No UI)**
+    * **Permissions Needed:**
+        * Glip
+        * Webhook Subscriptions
+
+Note : This bot uses [Webhook Based Subscriptions](https://developer.ringcentral.com/api-docs/latest/index.html#!#RefCreateSubscription) to Listen to conversations posted on Glip
+
+For more information on Webhooks, refer to our [QuickStart Guide on Webhooks](http://ringcentral-quickstart.readthedocs.io/en/latest/webhooks/) 
 
 ## Usage 
 
@@ -61,9 +89,10 @@ $ cd glip-botman
 $ php -S localhost:8080
 ```
 
-### Start ngrok ( for demo purposes using ngrok )
-
-Open another terminal a
+### Start ngrok ( Optional )
+For demo purposes we are using ngrok.
+ 
+Open another terminal and:
 ```bash
 $ ngrok http 8080
 ```
@@ -92,12 +121,14 @@ If its successful, you will get a message as below :
 **Wohooo, your Bot is Registered. Please follow the instructions on on-boarding the bot into Glip**
 
 ## On-Boarding Bot into Glip
-1. **Assign a Name and Unique Email Address to the Bot**
+1. **Assign a Name and Unique Email Address to the Bot**  
+     https://service.devtest.ringcentral.com
  ![Bot user screenshots](assets/service_web.png)
  
 **Note:** The above user refers to the same user whose credentials was used in the `.env` file to configure the bot.
   
-2. **Invite the bot into a group using the email ID**
+2. **Invite the bot into a group using the email ID**  
+     https://glip.devtest.ringcentral.com/
  ![Glip group screenshots](assets/glip_group.png)
 
 **Note:** Create a group on `Glip` and invite the Bot using `Add Member` button on the top extreme right.
