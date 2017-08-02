@@ -47,7 +47,7 @@ $ vi .env
 ```
 
 
-Edit the .env file to copy the below and edit the app details and user details.
+Edit the .env file and copy the below and edit app details and user details.
 
 ```php
     GLIP_SERVER=https://platform.devtest.ringcentral.com        // Server Url ( Production: https://platform.ringcentral.com || Sandbox: https://platform.devtest.ringcentral.com )
