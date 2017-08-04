@@ -4,7 +4,7 @@
 
 ![APP screenshots](assets/botman_glip.png)
 
-This is a simple Botman Adaptor for Glip which is ready to use and fairly simple to install. Before we install, lets look at the requirements below:
+This is a simple Botman Adaptor for Glip which is ready to use and fairly simple to install. Before we install, lets look at the requirements below :
  
  
 ## Requirement
