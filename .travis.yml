@@ -1,0 +1,17 @@
+language: php
+
+php:
+  - 7.0
+  - 7.1
+  - 5.6
+  - hhvm
+
+before_script:
+  - make install
+
+script:
+  - mkdir -p build/logs
+  - make test
+
+after_script:
+  - make coveralls
