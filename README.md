@@ -1,3 +1,11 @@
+[![Build Status](https://travis-ci.org/ringcentral/glip-botman.svg?branch=master)](https://travis-ci.org/ringcentral/glip-botman)
+[![Code Climate](https://img.shields.io/codeclimate/github/ringcentral/glip-botman.svg)](https://codeclimate.com/github/ringcentral/glip-botman)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Chat](https://img.shields.io/badge/chat-on%20glip-orange.svg)](https://glipped.herokuapp.com/)
+[![Coverage Status](https://coveralls.io/repos/github/ringcentral/glip-botman/badge.svg?branch=master)](https://coveralls.io/github/ringcentral/glip-botman?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fb9bbae6b5f34945b2af1f283fc8538a)](https://www.codacy.com/app/anilkumarbp/Glipped?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=anilkumarbp/Glipped&amp;utm_campaign=Badge_Grade)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/anilkumarbp/Glipped/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/anilkumarbp/Glipped/?branch=master)
+
 # Glip - Botman
 
 [Glip](https://glip.com/) Adaptor for [Botman](https://botman.io/1.5/installation).
