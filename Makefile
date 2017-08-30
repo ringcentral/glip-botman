@@ -1,6 +1,6 @@
 .PHONY: test
 test:
-	./vendor/bin/phpunit --coverage-clover build/logs/clover.xml -c test
+	./vendor/bin/phpunit --configuration ./phpunit.xml
 
 .PHONY: install
 install:
