@@ -12,13 +12,6 @@ $dotenv->load();
 
 try {
 
-    // Create a Subscription using webhooks method
-//    $rcsdk = new SDK($_ENV['GLIP_APPKEY'], $_ENV['GLIP_APPSECRET'] , $_ENV['GLIP_SERVER'], 'Demo', '1.0.0');
-//
-//    $platform = $rcsdk->platform();
-//
-//    $auth = $platform->login($_ENV['GLIP_USERNAME'], $_ENV['GLIP_EXTENSION'], $_ENV['GLIP_PASSWORD']);
-
 
     if (!isset($_GET['code'])) {
         return;
