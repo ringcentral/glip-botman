@@ -1,5 +1,6 @@
 <?php
 
+
 require('vendor/autoload.php');
 
 use RingCentral\SDK\SDK;
@@ -12,24 +13,28 @@ $dotenv->load();
 
 try {
 
-
-    if (!isset($_GET['code'])) {
-        return;
-    }
-
     // Create SDK instance
     $rcsdk = new SDK($_ENV['GLIP_APPKEY'], $_ENV['GLIP_APPSECRET'] , $_ENV['GLIP_SERVER'], 'Demo', '1.0.0');
 
     // Create Platform instance
     $platform = $rcsdk->platform();
-    $qs = $platform->parseAuthRedirectUrl($_SERVER['QUERY_STRING']);
-    $qs["redirectUri"] = $_ENV['GLIP_REDIRECT_URL'];
-    $apiResponse = $platform->login($qs);
+    /*
+     * Using the caching mechanism
+     */
+    $cacheDir = __DIR__ . DIRECTORY_SEPARATOR . '_cache';
+    $file = $cacheDir . DIRECTORY_SEPARATOR . 'platform.json';
 
-    print 'The Tokens is : ' . PHP_EOL . print_r($apiResponse->text());
+    $cachedAuth = array();
 
+    if (file_exists($file)) {
+        $cachedAuth = json_decode(file_get_contents($file), true);
+    }
 
-    // Setup the Webhook Subscription
+    $platform->auth()->setData($cachedAuth);
+
+    /*
+     * Setup Webhook Subscription
+     */
     $apiResponse = $platform->post('/subscription',array(
         "eventFilters"=>array(
             "/restapi/v1.0/glip/groups",
@@ -41,7 +46,7 @@ try {
         )
     ));
 
-    print PHP_EOL . "Wohooo, your Bot is Registered. Please follow the instructions on on-boarding the bot into Glip" . PHP_EOL;
+    print PHP_EOL . "Wohooo, your Bot is Registered now." . PHP_EOL;
 
 } catch (Exception $e) {
 

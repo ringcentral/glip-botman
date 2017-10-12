@@ -8,6 +8,7 @@ use Mpociot\BotMan\Message;
 use Mpociot\BotMan\Question;
 use Mpociot\BotMan\Drivers\Driver;
 use Illuminate\Support\Collection;
+use SebastianBergmann\CodeCoverage\Report\PHP;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -161,13 +162,6 @@ class GlipBotman extends Driver
 
         $cacheDir = __DIR__ . DIRECTORY_SEPARATOR . '_cache';
         $file = $cacheDir . DIRECTORY_SEPARATOR . 'platform.json';
-
-        if (!file_exists($cacheDir)) {
-            mkdir($cacheDir);
-            print 'The config is :' . PHP_EOL . print_r($this->config);
-            $platform->login($this->config->get('GLIP_USERNAME'), $this->config->get('GLIP_EXTENSION'), $this->config->get('GLIP_PASSWORD'));
-            file_put_contents($file, json_encode($platform->auth()->data(), JSON_PRETTY_PRINT));
-        }
 
         $cachedAuth = array();
 
