@@ -41,7 +41,6 @@ class GlipBotman extends Driver
     public function buildPayload(Request $request)
     {
         $this->payload = new ParameterBag((array) json_decode($request->getContent(), true));
-        print 'The payload during the glip buildpayload method is ' . PHP_EOL . print_r($this->payload);
         $this->event = Collection::make($this->payload->get('event'));
     }
 
@@ -89,7 +88,6 @@ class GlipBotman extends Driver
      */
     public function getConversationAnswer(Message $message)
     {
-        print 'Inside the get Conv Answeer' . PHP_EOL . print_r($message);
         return Answer::create($message->getMessage())->setMessage($message);
     }
 
@@ -219,7 +217,7 @@ class GlipBotman extends Driver
     public function reply($message, $matchingMessage, $additionalParameters = [])
     {
 
-        print 'Inside Reply method' . PHP_EOL;
+
         $endpoint = 'sendMessage';
         $parameters = array_merge([
             'groupId' => $matchingMessage->getChannel(),
@@ -270,7 +268,6 @@ class GlipBotman extends Driver
             'groupId' => $recipient,
         ], $additionalParameters);
 
-        print 'The mesaage is : ' . PHP_EOL . print_r($message);
         /*
          * If we send a Question with buttons, ignore
          * the text and append the question.
@@ -322,7 +319,6 @@ class GlipBotman extends Driver
      */
     public function sendPayload($payload)
     {
-        print 'Inside GlipTest sendpayload' . PHP_EOL . print_r($payload);
         return $this->getPlatform()->post($this->endpoint, $payload);
     }
 
