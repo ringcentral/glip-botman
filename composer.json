@@ -1,5 +1,5 @@
 {
-  "name": "anilkumarbp/glip-botman",
+  "name": "ringcentral/glip-botman",
   "type": "library",
   "description": "Independent adaptor for Glip to support Botman",
   "keywords": [
