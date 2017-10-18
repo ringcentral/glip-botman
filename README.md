@@ -46,6 +46,28 @@ Require Composer's autoloader in your PHP script ( index.php ) assuming it is in
 require('vendor/autoload.php');
 ```
     
+### Prerequisites
+
+* ngrok: ngrok is a handy tool that lets you create a secure tunnel to local host. You can download the ngrok at https://ngrok.com/download
+* Create a new app with platform type -"Server/bot". (https://developer.ringcentral.com)
+
+### Define an Application in RingCentral
+
+In order to communicate with the RingCentral API, you will need to have RingCentral API Keys for the appropriate environment, either **Sandbox** or **Production**.
+ 
+ 1. Login to the Developer Portal [https://developer.ringcentral.com/login.html#/](https://developer.ringcentral.com/login.html#/) if you haven't already. 2. Click on 'Create App' to define a new application
+    * **Application Name:** Your choice, but something easy to identify and associate with purpose is good
+    * **Description:** Your suitable description for the application. 
+    * **Application Type:** Private
+    * **Platform Type:** **Server/Bot**
+    * **Permissions Needed:**
+        * Glip
+        * Webhook Subscriptions
+
+Note : This bot uses [Webhook Based Subscriptions](https://developer.ringcentral.com/api-docs/latest/index.html#!#RefCreateSubscription) to Listen to conversations posted on Glip
+
+For more information on Webhooks, refer to our [QuickStart Guide on Webhooks](http://ringcentral-quickstart.readthedocs.io/en/latest/webhooks/)
+    
 ## Configure your Bot
 
 ### Provide Bot User details in `.env` file:
@@ -59,29 +81,11 @@ Edit the .env file and copy the below and edit app details and user details.
 
 ```php
     GLIP_SERVER=https://platform.devtest.ringcentral.com        // Server Url ( Production: https://platform.ringcentral.com || Sandbox: https://platform.devtest.ringcentral.com )
-    GLIP_APPKEY=appKey                                              
-    GLIP_APPSECRET=appSecret                                     
-    GLIP_USERNAME=Username                                  
-    GLIP_PASSWORD=Password                                
-    GLIP_EXTENSION=Extension                                
+    GLIP_APPKEY=                                                // ClientId
+    GLIP_APPSECRET=                                             // Client Secret
+    GLIP_REDIRECT_URL=                                          // Glip Redirect URL as created above
+    GLIP_WEBHOOK_URL=                                           // Glip Webhook URL                                  
 ```
-
-### Define an Application in RingCentral
-
-In order to communicate with the RingCentral API, you will need to have RingCentral API Keys for the appropriate environment, either **Sandbox** or **Production**.
- 
- 1. Login to the Developer Portal [https://developer.ringcentral.com/login.html#/](https://developer.ringcentral.com/login.html#/) if you haven't already. 2. Click on 'Create App' to define a new application
-    * **Application Name:** Your choice, but something easy to identify and associate with purpose is good
-    * **Description:** Your suitable description for the application. 
-    * **Application Type:** Private
-    * **Platform Type:** **Server-only (No UI)**
-    * **Permissions Needed:**
-        * Glip
-        * Webhook Subscriptions
-
-Note : This bot uses [Webhook Based Subscriptions](https://developer.ringcentral.com/api-docs/latest/index.html#!#RefCreateSubscription) to Listen to conversations posted on Glip
-
-For more information on Webhooks, refer to our [QuickStart Guide on Webhooks](http://ringcentral-quickstart.readthedocs.io/en/latest/webhooks/) 
 
 ## Usage 
 
@@ -107,9 +111,24 @@ $ ngrok http 8080
 ### Setup Webhook URL for the Bot
 Just point the webhook subscription URL to: ( you must start ngrok if using it ) lets say the above step gives you an endpoint for the server as below:
 ```php
-https://f0aad057.ngrok.io/index.php
+https://f0aad057.ngrok.io/webhook.php
 ```
 Add this to the .env parameter `GLIP_WEBHOOK_URL` created above. 
+
+## Register the Bot ( Bot Provisioning )
+
+### Add OAuth Redirect URI 
+
+- Go to the settings section for the app created in developer protal and In the oAuth redirect URI field, paste your ngrok forwarding address and add the /oauth endpoint at the end of the address that we opened up in our script. In this example it would look something like this:
+```
+https://f0aad057.ngrok.io/callback.php
+```
+
+
+- Go to the `Bot` tab of the recently created app in the developer portal. Click on the `Add to Glip` button.
+![](assets/bot_tab.png)
+This will trigger the installation of the bot and will respond back with `authorization code` in url specified in `Step-5`.
+![](assets/authorization.png)
 
 ## Start the Bot
 
@@ -125,22 +144,19 @@ $ php index.php
 
 If its successful, you will get a message as below : 
 
-**Wohooo, your Bot is Registered. Please follow the instructions on on-boarding the bot into Glip**
+**Wohooo, your Bot is Registered. **
 
-## On-Boarding Bot into Glip
-1. **Assign a Name and Unique Email Address to the Bot**  
-     https://service.devtest.ringcentral.com
- ![Bot user screenshots](assets/service_web.png)
- 
-**Note:** The above user refers to the same user whose credentials was used in the `.env` file to configure the bot.
-  
-2. **Invite the bot into a group using the email ID**  
-     https://glip.devtest.ringcentral.com/
- ![Glip group screenshots](assets/glip_group.png)
+## Start Chatting with the Bot
 
-**Note:** Create a group on `Glip` and invite the Bot using `Add Member` button on the top extreme right.
+
+1. **Invite the bot into a group using the Bot Name**  
+     - Login to https://glip.devtest.ringcentral.com/ using your Sandbox number and password .   
+     - Search for the bot using the name you used above to create a bot.
+     ```php
+     minion-bot
+     ```
  
-3. **Start chatting with the Bot**
+2. **Start chatting with the Bot**
  ![Glip group screenshots](assets/chat_bot.png)
  
 ## Extending the Botman-Glip Adapter

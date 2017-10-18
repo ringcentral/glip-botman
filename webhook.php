@@ -20,10 +20,7 @@ $dotenv->load();
 $config = [
     'GLIP_SERVER' => $_ENV['GLIP_SERVER'],
     'GLIP_APPKEY' => $_ENV['GLIP_APPKEY'],
-    'GLIP_APPSECRET' => $_ENV['GLIP_APPSECRET'],
-    'GLIP_USERNAME' => $_ENV['GLIP_USERNAME'],
-    'GLIP_PASSWORD' => $_ENV['GLIP_PASSWORD'],
-    'GLIP_EXTENSION' => $_ENV['GLIP_EXTENSION'],
+    'GLIP_APPSECRET' => $_ENV['GLIP_APPSECRET']
 ];
 
 
@@ -44,7 +41,6 @@ if (!file_exists($cacheDir)) {
 // Load the Driver into Botman
 DriverManager::loadDriver(GlipBotman::class);
 
-print "The vaialble drivers are : ". print_r(DriverManager::getAvailableDrivers());
 
 // Create a Botman Instance
 $botman = BotManFactory::create($config);

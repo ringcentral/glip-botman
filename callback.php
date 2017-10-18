@@ -4,7 +4,7 @@
 require('vendor/autoload.php');
 
 use RingCentral\SDK\SDK;
-
+use Symfony\Component\HttpFoundation\Response;
 
 // Parse the .env file
 $dotenv = new Dotenv\Dotenv(getcwd());
@@ -13,11 +13,9 @@ $dotenv->load();
 
 try {
 
-
     if (!isset($_GET['code'])) {
         return;
     }
-
 
     // Create SDK instance
     $rcsdk = new SDK($_ENV['GLIP_APPKEY'], $_ENV['GLIP_APPSECRET'] , $_ENV['GLIP_SERVER'], 'Demo', '1.0.0');
@@ -38,12 +36,24 @@ try {
     }
     file_put_contents($file, json_encode($platform->auth()->data(), JSON_PRETTY_PRINT));
 
+    $platform->post('/subscription',array(
+        "eventFilters"=>array(
+            "/restapi/v1.0/glip/groups",
+            "/restapi/v1.0/glip/posts"
+        ),
+        "deliveryMode"=>array(
+            "transportType"=> "WebHook",
+            "address"=>$_ENV['GLIP_WEBHOOK_URL']
+        )
+    ));
+
+//    return Response::create('',200)->send();
+
     print PHP_EOL . "Wohooo, your Bot is on-boarded to Glip." . PHP_EOL;
+
 
 } catch (Exception $e) {
 
     print 'Webhook Provision Error: ' . $e->getMessage() . PHP_EOL;
 
 }
-
-
