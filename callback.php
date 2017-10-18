@@ -36,19 +36,6 @@ try {
     }
     file_put_contents($file, json_encode($platform->auth()->data(), JSON_PRETTY_PRINT));
 
-    $platform->post('/subscription',array(
-        "eventFilters"=>array(
-            "/restapi/v1.0/glip/groups",
-            "/restapi/v1.0/glip/posts"
-        ),
-        "deliveryMode"=>array(
-            "transportType"=> "WebHook",
-            "address"=>$_ENV['GLIP_WEBHOOK_URL']
-        )
-    ));
-
-//    return Response::create('',200)->send();
-
     print PHP_EOL . "Wohooo, your Bot is on-boarded to Glip." . PHP_EOL;
 
 
