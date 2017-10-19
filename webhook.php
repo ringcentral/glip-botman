@@ -24,7 +24,9 @@ $config = [
 ];
 
 
-// Create the Subscription using Webhooks Method
+/*
+ * Create the Subscription using Webhooks Method
+ */
 $cacheDir = __DIR__ . DIRECTORY_SEPARATOR . '_subscribe';
 if (!file_exists($cacheDir)) {
 
