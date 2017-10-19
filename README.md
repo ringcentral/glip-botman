@@ -26,9 +26,9 @@ Note: for PHP v 5.6 you would need to comment the below line in the `php.ini` fi
 
 ## Installation & Setup
 
-### Via Github Repo
+### Via Github Repo ( recommended )
 ```php
-$ git clone https://github.com/anilkumarbp/glip-botman.git
+$ git clone https://github.com/anilkumarbp/glip-botman.git -b bot-provisioner
 $ cd glip-botman
 $ curl -sS https://getcomposer.org/installer | php
 $ composer install
@@ -37,7 +37,7 @@ $ composer install
 
 Require this package with composer using the following command:    
 ```php
-$ composer require anilkumarbp/glip-botman
+$ composer require ringcentral/glip-botman
 ```
 
 Require Composer's autoloader in your PHP script ( index.php ) assuming it is in the same directory where you installed Composer :
