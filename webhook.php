@@ -20,7 +20,8 @@ $dotenv->load();
 $config = [
     'GLIP_SERVER' => $_ENV['GLIP_SERVER'],
     'GLIP_APPKEY' => $_ENV['GLIP_APPKEY'],
-    'GLIP_APPSECRET' => $_ENV['GLIP_APPSECRET']
+    'GLIP_APPSECRET' => $_ENV['GLIP_APPSECRET'],
+    'GLIP_BOT_NAME' => '@'.$_ENV['GLIP_BOT_NAME']
 ];
 
 

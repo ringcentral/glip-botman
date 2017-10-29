@@ -102,7 +102,18 @@ class GlipBotman extends Driver
         if ($this->payload->get('body') !== null) {
             $callback = Collection::make($this->payload->get('body'));
 
-            return [new Message($callback->get('text'), $callback->get('creatorId'), $callback->get('groupId'), $this->payload->get('body'))];
+            /*
+             * To handle @mentions
+             */
+            $regex = "#<\s*?a\b[^>]*>(.*?)</a\b[^>]*>#s";
+            preg_match($regex, $callback->get('text'), $matches);
+
+            if($matches && $matches[1] == $this->config->get('GLIP_BOT_NAME')) {
+                $glipMessage = explode(":",$callback->get('text'));
+                return [new Message($glipMessage[2], $callback->get('creatorId'), $callback->get('groupId'), $this->payload->get('body'))];
+            }
+
+            return [new Message('', $callback->get('creatorId'), $callback->get('groupId'), $this->payload->get('body'))];
         }
 
     }
@@ -176,7 +187,6 @@ class GlipBotman extends Driver
             }
 
             else {
-                print 'The Username is : ' . $this->config->get('GLIP_USERNAME');
                 $refresh = $platform->login($this->config->get('GLIP_USERNAME'), $this->config->get('GLIP_EXTENSION'), $this->config->get('GLIP_PASSWORD'));
                 file_put_contents($file, json_encode($refresh->jsonArray(), JSON_PRETTY_PRINT));
                 return $platform;
