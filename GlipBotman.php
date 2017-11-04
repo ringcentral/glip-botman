@@ -101,16 +101,14 @@ class GlipBotman extends Driver
     {
         if ($this->payload->get('body') !== null) {
             $callback = Collection::make($this->payload->get('body'));
-
             /*
              * To handle @mentions
              */
             $regex = "#<\s*?a\b[^>]*>(.*?)</a\b[^>]*>#s";
             preg_match($regex, $callback->get('text'), $matches);
-
             if($matches && $matches[1] == $this->config->get('GLIP_BOT_NAME')) {
-                $glipMessage = explode(":",$callback->get('text'));
-                return [new Message($glipMessage[2], $callback->get('creatorId'), $callback->get('groupId'), $this->payload->get('body'))];
+                $glipMessage = explode("/a> ",$callback->get('text'));
+                return [new Message($glipMessage[1], $callback->get('creatorId'), $callback->get('groupId'), $this->payload->get('body'))];
             }
 
             return [new Message('', $callback->get('creatorId'), $callback->get('groupId'), $this->payload->get('body'))];

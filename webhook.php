@@ -55,7 +55,7 @@ $botman->hears('hello', function (BotMan $bot) {
 })->driver(GlipBotman::class);
 
 $botman->hears('what is your name', function (BotMan $bot) {
-    $bot->reply('My name is Minion Bot.');
+    $bot->reply('My name is Paco Vu.');
 })->driver(GlipBotman::class);
 
 
