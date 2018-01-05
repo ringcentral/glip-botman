@@ -84,7 +84,9 @@ Edit the .env file and copy the below and edit app details and user details.
     GLIP_APPKEY=                                                // ClientId
     GLIP_APPSECRET=                                             // Client Secret
     GLIP_REDIRECT_URL=                                          // Glip Redirect URL as created above
-    GLIP_WEBHOOK_URL=                                           // Glip Webhook URL                                  
+    GLIP_WEBHOOK_URL=                                           // Glip Webhook URL
+    GLIP_BOT_NAME=                                              // Glip Bot Name
+    GLIP_SANDBOX_NUMBER=                                        // Sandbox Number  
 ```
 
 ## Usage 
