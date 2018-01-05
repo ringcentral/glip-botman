@@ -28,7 +28,7 @@ Note: for PHP v 5.6 you would need to comment the below line in the `php.ini` fi
 
 ### Via Github Repo ( recommended )
 ```php
-$ git clone https://github.com/anilkumarbp/glip-botman.git -b bot-provisioner
+$ git clone https://github.com/ringcentral/glip-botman.git -b bot-provisioner
 $ cd glip-botman
 $ curl -sS https://getcomposer.org/installer | php
 $ composer install
