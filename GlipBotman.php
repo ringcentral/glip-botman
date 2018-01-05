@@ -217,6 +217,9 @@ class GlipBotman extends Driver
     public function reply($message, $matchingMessage, $additionalParameters = [])
     {
 
+        print 'INside reply';
+
+        print 'The message is :' . PHP_EOL . $message;
 
         $endpoint = 'sendMessage';
         $parameters = array_merge([
@@ -232,7 +235,7 @@ class GlipBotman extends Driver
                 'inline_keyboard' => $this->convertQuestion($message),
             ], true);
         } elseif ($message instanceof IncomingMessage) {
-            if (! is_null($message->getImage())) {
+            if (!is_null($message->getImage())) {
                 if (strtolower(pathinfo($message->getImage(), PATHINFO_EXTENSION)) === 'gif') {
                     $endpoint = 'sendDocument';
                     $parameters['document'] = $message->getImage();
@@ -241,20 +244,40 @@ class GlipBotman extends Driver
                     $parameters['photo'] = $message->getImage();
                 }
                 $parameters['caption'] = $message->getMessage();
-            } elseif (! is_null($message->getVideo())) {
+            } elseif (!is_null($message->getVideo())) {
                 $endpoint = 'sendVideo';
                 $parameters['video'] = $message->getVideo();
                 $parameters['caption'] = $message->getMessage();
             } else {
                 $parameters['text'] = $message->getMessage();
             }
+        } elseif (is_numeric($message)) {
+                  print 'True';
+                $glipMessage = $this->sendSMS($message);
+                $parameters['text'] = $glipMessage;
         } else {
-            $parameters['text'] = $message;
-        }
+                $parameters['text'] = $message;
+            }
 
-        $this->getPlatform()->post('/glip/posts', $parameters);
+            $this->getPlatform()->post('/glip/posts', $parameters);
     }
 
+    /*
+     *
+     */
+    function sendSMS($number)
+    {
+
+        $apiResponse = $this->getPlatform()->post('/account/~/extension/~/sms', array(
+            'from' => array('phoneNumber' => $this->config->get('GLIP_SANDBOX_NUMBER')),
+            'to'   => array(
+                array('phoneNumber' => $number),
+            ),
+            'text' => 'You have received a Test message from '. $this->config->get('GLIP_BOT_NAME'),
+        ));
+
+        return ($apiResponse->ok()) ? "The SMS was delivered successfully !" : "The SMS was not delivered successfully! Please check the logs";
+    }
     /**
      * @param string|Question|IncomingMessage $message
      * @param Message $matchingMessage

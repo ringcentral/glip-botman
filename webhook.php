@@ -20,7 +20,9 @@ $dotenv->load();
 $config = [
     'GLIP_SERVER' => $_ENV['GLIP_SERVER'],
     'GLIP_APPKEY' => $_ENV['GLIP_APPKEY'],
-    'GLIP_APPSECRET' => $_ENV['GLIP_APPSECRET']
+    'GLIP_APPSECRET' => $_ENV['GLIP_APPSECRET'],
+    'GLIP_SANDBOX_NUMBER' => $_ENV['GLIP_SANDBOX_NUMBER'],
+    'GLIP_BOT_NAME' => $_ENV['GLIP_BOT_NAME']
 ];
 
 
@@ -60,6 +62,10 @@ $botman->hears('what is your name', function (BotMan $bot) {
 
 $botman->hears('What can you do', function (BotMan $bot) {
     $bot->reply('I am still under construction');
+})->driver(GlipBotman::class);
+
+$botman->hears('send sms to {number}', function (BotMan $bot, $query) {
+    $bot->reply($query);
 })->driver(GlipBotman::class);
 
 

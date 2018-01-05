@@ -42,11 +42,12 @@ try {
         ),
         "deliveryMode"=>array(
             "transportType"=> "WebHook",
-            "address"=>$_ENV['GLIP_WEBHOOK_URL']
+            "address"=>$_ENV['GLIP_WEBHOOK_URL'],
+            "expiresIn"=> 630720000
         )
     ));
 
-    print PHP_EOL . "Wohooo, your Bot is Registered now." . PHP_EOL;
+    print PHP_EOL . "Wohooo, your Bot is Registered now." . print_r($apiResponse->response()->getBody()) . PHP_EOL;
 
 } catch (Exception $e) {
 
